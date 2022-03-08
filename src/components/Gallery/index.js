@@ -1,27 +1,18 @@
 import React from "react";
 //importing capitalize first letter function from utils
 import { capitalizeFirstLetter } from "../../assets/utils/helpers";
-import photo from '../../assets/small/commercial/0.jpg'
+//importing Photolist
+import PhotoList from "./PhotoList";
 
 //Gallery Component
-function Gallery(props) {
-  const currentCategory = {
-    name: "commercial",
-    description:
-      "Photos of grocery stores, food trucks, and other commercial projects",
-  };
+function Gallery({ currentCategory }) {
+  const { name, description } = currentCategory;
   return (
     <section>
-      {/* calling imported helper function*/}
-      <h1>{capitalizeFirstLetter(currentCategory.name)}</h1>
-      <p>{currentCategory.name}</p>
-      <div className="flex-row">
-        <img
-          src={photo}
-          alt="Commercial Example"
-          className="img-thumbnail mx-1"
-        />
-      </div>
+      <h1 data-testid="h1tag">{capitalizeFirstLetter(name)}</h1>
+      <p>{description}</p>
+      {/*pass down the currentCategory.name to prop into the Photolist component from Gallery */}
+      <PhotoList category={currentCategory.name} />
     </section>
   );
 }

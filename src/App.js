@@ -29,7 +29,8 @@ function App() {
       ></Nav>
       <main>
         <div>
-          <Gallery></Gallery>
+          {/*passing the current category, which is the category selected by the user, from the Gallery component in App.js*/}
+          <Gallery currentCategory={currentCategory}></Gallery>
           <About></About>
         </div>
       </main>
