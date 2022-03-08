@@ -2,7 +2,7 @@ import React from "react";
 //importing capitalize first letter function from utils
 import { capitalizeFirstLetter } from "../../assets/utils/helpers";
 //importing Photolist
-import PhotoList from "./PhotoList";
+import PhotoList from "../Photolist/index";
 
 //Gallery Component
 function Gallery({ currentCategory }) {
