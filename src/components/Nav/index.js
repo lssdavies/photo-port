@@ -21,38 +21,41 @@ function Nav()  {
       }
 
     return (
-        <header className=''>
-            <h2>
-    <a href="/">
-      <span role="img" aria-label="camera"> 📸</span> Oh Snap!
-    </a>
-  </h2>
-  <nav>
-    <ul className="flex-row">
-      <li className="mx-2">
-        <a href="#about">
-          About me
-        </a>
-      </li>
-      <li>
-        <span>Contact</span>
-      </li>
-      {/*mapping over the array to get category names */}
-      {categories.map((category) => (
-  <li
-    className="mx-1"
-    key={category.name}
-  >
-      {/* important wrap function declaration rather than just calling categorySelected(category.name), which would cause the function to get called whenever the component renders as well. */}
-    <span onClick={() => categorySelected(category.name)} >
-      {category.name}
-    </span>
-  </li>
-))}
-    </ul>
-  </nav>
-        </header>
-    )
+      <header className="">
+        <h2>
+          {/* a data-testid is used for tests */}
+          <a data-testid="link" href="/">
+            <span role="img" aria-label="camera">
+              {" "}
+              📸
+            </span>{" "}
+            Oh Snap!
+          </a>
+        </h2>
+        <nav>
+          <ul className="flex-row">
+            <li className="mx-2">
+              {/* a data-testid is used for tests */}
+              <a data-testid="about" href="#about">
+                About me
+              </a>
+            </li>
+            <li>
+              <span>Contact</span>
+            </li>
+            {/*mapping over the array to get category names */}
+            {categories.map((category) => (
+              <li className="mx-1" key={category.name}>
+                {/* important wrap function declaration rather than just calling categorySelected(category.name), which would cause the function to get called whenever the component renders as well. */}
+                <span onClick={() => categorySelected(category.name)}>
+                  {category.name}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
+    );
 }
 
 export default Nav;
