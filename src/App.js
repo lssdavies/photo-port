@@ -1,16 +1,13 @@
 // importing react and state 
 import React, { useState } from "react";
 // importing all app components
-import About from "./components/About";
 import Nav from "./components/Nav";
+import About from "./components/About";
 import Gallery from "./components/Gallery";
 import ContactForm from "./components/Contact";
 
 function App() {
-
-  //setting state for contact component
-  const [contactSelected, setContactSelected] = useState(false);
-
+  
   //lifting state up to apps so that it can be passed as props to Nav, Gallery or About
   const [categories] = useState([
     {
@@ -28,12 +25,16 @@ function App() {
   //setting the state, establish an array with a variable to store and set state
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
+  const [contactSelected, setContactSelected] = useState(false);
+
   return (
     <div>
       <Nav
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
         <div>

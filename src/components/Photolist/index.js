@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-
-// import photo from "../../assets/small/commercial/0.jpg";
+import Modal from "../Modal";
 
 const PhotoList = ({ category }) => {
+  //hooks for assigning stastes
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPhoto, setCurrentPhoto] = useState();
+
   const [photos] = useState([
     {
       name: "Grocery aisle",
@@ -122,14 +125,25 @@ const PhotoList = ({ category }) => {
   //Checks each photo in the photos array using filter() to match the category that the user selected. Matches are returned in an array and assigned to currentPhotos. Then we can map the currentPhotos array to render each photo that matches the category selected by the user.
   const currentPhotos = photos.filter((photo) => photo.category === category);
 
+  /*current photo. this function updates the current photo state using the setCurrentPhoto function with the data retrieved through the click event. Spread operator is used to to add the index: i key value pair to the current photo state. Because currentPhoto now contains the two critical data points needed for the modal, we can pass in currentPhoto as a prop to the Modal.*/
+  const toggleModal = (image, i) => {
+    setCurrentPhoto({ ...image, index: i });
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <div>
+      {/* will only render the Modal if the value isModalOpen is true, */}
+      {isModalOpen && (
+        <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
+      )}
       <div className="flex-row">
         {currentPhotos.map((image, i) => (
           <img
             src={require(`../../assets/small/${category}/${i}.jpg`)}
             alt={image.name}
             className="img-thumbnail mx-1"
+            onClick={() => toggleModal(image, i)}
             key={image.name}
           />
         ))}
