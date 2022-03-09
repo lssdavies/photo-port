@@ -4,8 +4,9 @@ import { capitalizeFirstLetter } from "../../assets/utils/helpers";
 //importing Photolist
 import PhotoList from "../Photolist/index";
 
-//Gallery Component
+//Gallery Component receiving currentCategory as prop from App.js
 function Gallery({ currentCategory }) {
+  //deconstructing currentCategory to pull out name and description
   const { name, description } = currentCategory;
   return (
     <section>

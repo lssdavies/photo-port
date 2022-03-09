@@ -1,7 +1,10 @@
+// importing react and state 
 import React, { useState } from "react";
+// importing all app components
 import About from "./components/About";
 import Nav from "./components/Nav";
 import Gallery from "./components/Gallery";
+import ContactForm from "./components/Contact";
 
 function App() {
   //lifting state up to apps so that it can be passed as props to Nav, Gallery or About
@@ -29,6 +32,7 @@ function App() {
       ></Nav>
       <main>
         <div>
+          <ContactForm></ContactForm>
           {/*passing the current category, which is the category selected by the user, from the Gallery component in App.js*/}
           <Gallery currentCategory={currentCategory}></Gallery>
           <About></About>

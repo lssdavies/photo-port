@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { capitalizeFirstLetter } from '../../assets/utils/helpers';
 
-
+//using props passed from App.js to set the sate of currentCategory 
   function Nav(props) {
   const {
     categories = [],
