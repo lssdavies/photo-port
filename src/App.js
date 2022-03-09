@@ -7,6 +7,10 @@ import Gallery from "./components/Gallery";
 import ContactForm from "./components/Contact";
 
 function App() {
+
+  //setting state for contact component
+  const [contactSelected, setContactSelected] = useState(false);
+
   //lifting state up to apps so that it can be passed as props to Nav, Gallery or About
   const [categories] = useState([
     {
@@ -23,6 +27,7 @@ function App() {
   ]);
   //setting the state, establish an array with a variable to store and set state
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
+
   return (
     <div>
       <Nav
@@ -32,10 +37,15 @@ function App() {
       ></Nav>
       <main>
         <div>
-          <ContactForm></ContactForm>
-          {/*passing the current category, which is the category selected by the user, from the Gallery component in App.js*/}
-          <Gallery currentCategory={currentCategory}></Gallery>
-          <About></About>
+          {/* ternary operator to determine what to render based on the state of contactSelected */}
+          {!contactSelected ? (
+            <>
+              <Gallery currentCategory={currentCategory}></Gallery>
+              <About></About>
+            </>
+          ) : (
+            <ContactForm></ContactForm>
+          )}
         </div>
       </main>
     </div>
@@ -43,3 +53,16 @@ function App() {
 }
 
 export default App;
+
+/** <> </> that wrap the Gallery and About components. Can you imagine what these are and what they might be for? They are called React fragments—a shorthand abbreviation for <React.Fragment></React.Fragment>.
+
+They're a useful tool in React to allow multiple elements to be grouped together. Although in JSX you can only return a single parent element, this rule can be satisfied by wrapping the children components in a React fragment. This also allows you to wrap elements without creating extra DOM nodes, like wrapping with a <div> would do.  */
+/* This ternary operator code is equivalent to the following conditional statement:
+          if(!contactSelected) {
+              <>
+                <Gallery currentCategory={currentCategory}></Gallery>
+                <About></About>
+              </> 
+            } else {
+                <ContactForm></ContactForm>
+            }*/

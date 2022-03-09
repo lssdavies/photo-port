@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
 import { capitalizeFirstLetter } from '../../assets/utils/helpers';
 
-//using props passed from App.js to set the sate of currentCategory 
+//using props passed from App.js to set the sates currentCategory and contactSelected 
   function Nav(props) {
   const {
     categories = [],
     setCurrentCategory,
     currentCategory,
+    contactSelected,
+    setContactSelected,
   } = props;
 
   /*The first argument is the callback function, and the second argument is an array with a single element, currentCategory. The second argument directs the hook to re-render the component on changes to the value of this state. In other words, if currentCategory changes now, the component will re-render so that the change in document.title will be visible to the user.*/
@@ -30,19 +32,26 @@ import { capitalizeFirstLetter } from '../../assets/utils/helpers';
         <ul className="flex-row">
           <li className="mx-2">
             {/* a data-testid is used for tests */}
-            <a data-testid="about" href="#about">
+            <a
+              data-testid="about"
+              href="#about"
+              // on click calls back an anonymous function to assisgn the state of contactSelected
+              onClick={() => setContactSelected(false)}
+            >
               About me
             </a>
           </li>
-          <li>
-            <span>Contact</span>
+          <li className={`mx-2 ${contactSelected && "navActive"}`}>
+            <span onClick={() => setContactSelected(true)}>Contact</span>
           </li>
           {/*mapping over the array to get category names */}
           {categories.map((category) => (
             /*short-circuit expression means that currentCategory.name === category.name will get evaluated, and as long as it is true, then the second bit of the short circuit, navActive, will be returned.*/
             <li
               className={`mx-1 ${
-                currentCategory.name === category.name && "navActive"
+                currentCategory.name === category.name &&
+                !contactSelected &&
+                "navActive"
               }`}
               key={category.name}
             >
@@ -50,6 +59,7 @@ import { capitalizeFirstLetter } from '../../assets/utils/helpers';
               <span
                 onClick={() => {
                   setCurrentCategory(category);
+                  setContactSelected(false);
                 }}
               >
                 {capitalizeFirstLetter(category.name)}
